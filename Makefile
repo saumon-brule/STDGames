@@ -32,4 +32,3 @@ dev:
 		-e GDK_DISABLE_MITSHM=1 \
 		-e DISPLAY=$(DISPLAY) \
 		stddev
-
