@@ -1,22 +1,28 @@
-import { writable } from "svelte/store";
+import { writable, get } from "svelte/store";
+import { hardRouter, type Route } from "../router/router";
 
-export const currentPath = writable("/");
+export const currentPath = writable<Route>("/");
 
 export function navigate(way: number): void;
-export function navigate(path: string): void;
-export function navigate(arg0: string | number) {
+export function navigate(path: Route): void;
+export function navigate(arg0: Route | number) {
 	if (typeof arg0 === "number") {
 		window.history.go(arg0);
 	} else {
-		if (window.location.pathname !== arg0) {
+		console.log(arg0);
+		console.log(get(currentPath) !== arg0);
+		if (get(currentPath) !== arg0) {
 			window.history.pushState({}, "", arg0);
 			currentPath.set(arg0);
 		}
 	}
 }
 
-export function initRouter() {
+export function setupListeners() {
 	window.addEventListener("popstate", () => {
-		currentPath.set(window.location.pathname);
+		if (hardRouter.hasOwnProperty(window.location.pathname))
+			currentPath.set(window.location.pathname as Route);
+		else
+			currentPath.set("/");
 	});
 }

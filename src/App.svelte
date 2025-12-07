@@ -1,16 +1,12 @@
 <script lang="ts">
-    import Link from "./lib/Link.svelte";
-	import { currentPath, initRouter, navigate } from "./store/path";
+    import Router from "./router/Router.svelte";
+	import { currentPath, navigate, setupListeners } from "./store/path";
 
-	initRouter();
+	setupListeners();
 	$currentPath;
 	$: test = $currentPath;
 </script>
 
 <main>
-	<p>{$currentPath}</p>
-	<form on:submit|preventDefault={() => navigate(test)}>
-		<input type="text" bind:value={test} />
-	</form>
-	<Link to="/test">TEST</Link>
+	<Router/>
 </main>
