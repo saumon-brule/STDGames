@@ -1,16 +1,13 @@
 <script lang="ts">
 	import type { Component } from "svelte";
 	import { currentPath } from "./../store/path";
-	import { hardRouter, type Route } from "./router";
+	import { hardRouter, type RouterValue } from "./router";
 
-	let RouteComponent: Component;
+	let routed: RouterValue;
 
-	currentPath.subscribe((path) => {
-		console.log(path);
-		RouteComponent = hardRouter[path];
-	});
+	$: routed = hardRouter[$currentPath];
 </script>
 
 <div>
-	<RouteComponent />
+	<svelte:component this={routed.component} {...routed.props}/>
 </div>
