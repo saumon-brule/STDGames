@@ -1,10 +1,9 @@
 <script lang="ts">
-    import Link from "../../lib/Link.svelte";
-
-
+    import NavHeader from "../NavHeader.svelte";
 </script>
 
 <div id="home">
+	<NavHeader />
 	Home
-	<Link to="/library">library</Link>
+	<input type="text">
 </div>

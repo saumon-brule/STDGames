@@ -7,6 +7,4 @@
 	$: test = $currentPath;
 </script>
 
-<main>
-	<Router/>
-</main>
+<Router/>
