@@ -1,13 +1,15 @@
 .PHONY: release dev
 
+TARGET_DIR=/tmp/stdgames-launcher-target$(PWD)
+
 release:
 	@docker build -t stdbuild:latest -f Dockerfile.release .
 	@docker run -it --rm \
 		-v $(PWD)/:/app \
-		-v $(PWD)/src-tauri/target:/app/src-tauri/target \
+		-v $(TARGET_DIR)/target:/app/src-tauri/target \
 		stdbuild
 
-dev:
+dev: $(TARGET_DIR)
 	@xhost +local:docker
 	@docker build -t stddev:latest -f Dockerfile.dev .
 	@docker run -it --rm \
@@ -17,7 +19,7 @@ dev:
 		-v /sgoinfre:/sgoinfre \
 		-v /goinfre:/goinfre \
 		-v /tmp:/tmp \
-		-v $(PWD)/src-tauri/target_docker:/app/src-tauri/target \
+		-v $(TARGET_DIR)/target_docker:/app/src-tauri/target \
 		-v /tmp/.X11-unix:/tmp/.X11-unix \
 		-v /dev/dri:/dev/dri \
 		-v /run/user/$(shell id -u)/at-spi/bus_0:/run/user/0/at-spi/bus_0 \
@@ -32,3 +34,6 @@ dev:
 		-e GDK_DISABLE_MITSHM=1 \
 		-e DISPLAY=$(DISPLAY) \
 		stddev
+
+$(TARGET_DIR):
+	@mkdir -p $(TARGET_DIR)
