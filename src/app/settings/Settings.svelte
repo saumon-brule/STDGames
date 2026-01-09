@@ -1,6 +1,3 @@
-<script lang="ts">
-    import NavHeader from "../NavHeader.svelte";
-</script>
-
-<NavHeader />
-Settings
+<div id="settings-page">
+    Settings
+</div>

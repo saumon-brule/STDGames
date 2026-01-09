@@ -6,9 +6,9 @@ export const currentPath = writable<Route>("/");
 /**
  * @param way Allows to navigate in a certain direction, meaning going back and forth
  */
-export function navigate(way: number): void;
-export function navigate(path: string): void;
-export function navigate(arg0: string | number) {
+export function navigate(way: number, replace: boolean): void;
+export function navigate(path: string, replace: boolean): void;
+export function navigate(arg0: string | number, replace: boolean = false) {
 	if (typeof arg0 === "number") {
 		const way = arg0;
 		window.history.go(way);
@@ -17,11 +17,15 @@ export function navigate(arg0: string | number) {
 	const route = arg0;
 	if (isValidRoute(route)) {
 		if (get(currentPath) !== route) {
-			window.history.pushState({}, "", route);
+			if (replace) {
+				window.history.replaceState({}, "", route);
+			}else {
+				window.history.pushState({}, "", route);
+			}
 			currentPath.set(route);
 		}
 	} else {
-		open(route);
+		console.warn("Unknown route:", route);
 	}
 }
 

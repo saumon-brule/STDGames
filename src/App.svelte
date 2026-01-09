@@ -1,10 +1,10 @@
 <script lang="ts">
-    import Router from "./router/Router.svelte";
-	import { currentPath, navigate, setupListeners } from "./store/path";
+	import NavHeader from "./app/NavHeader/NavHeader.svelte";
+	import Router from "./router/Router.svelte";
+	import { setupListeners } from "./store/path";
 
 	setupListeners();
-	$currentPath;
-	$: test = $currentPath;
 </script>
 
-<Router/>
+<NavHeader />
+<Router />

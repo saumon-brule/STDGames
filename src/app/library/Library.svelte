@@ -1,8 +1,3 @@
-<script lang="ts">
-    import NavHeader from "../NavHeader.svelte";
-
-
-</script>
-
-<NavHeader/>
-Library
+<div id="library-page">
+    Library
+</div>

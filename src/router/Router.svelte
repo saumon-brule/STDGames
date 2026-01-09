@@ -1,5 +1,4 @@
 <script lang="ts">
-	import type { Component } from "svelte";
 	import { currentPath } from "./../store/path";
 	import { hardRouter, type RouterValue } from "./router";
 
