@@ -1,8 +1,8 @@
 import type { Component, ComponentProps } from "svelte";
-import Home from "../app/home/Home.svelte";
-import Library from "../app/library/Library.svelte";
 import Navigate from "../lib/routing/Navigate.svelte";
-import Settings from "../app/settings/Settings.svelte";
+import Home from "../app/pages/home/Home.svelte";
+import Library from "../app/pages/library/Library.svelte";
+import Settings from "../app/pages/settings/Settings.svelte";
 
 export type RouterValue<T extends Component<any> = Component<any>> = {
 	component: T,
